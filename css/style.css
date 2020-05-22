@@ -20,8 +20,10 @@ header {
     right: 0;
     left: 0;
     margin: 0;
+
     font-family: 'VT323', monospace;
     letter-spacing: 1px;
+    color: white;
 }
 
 #level-title {
@@ -45,4 +47,23 @@ header {
     text-align: right;
     color: rgba(80%, 80%, 80%, 0.75);
     text-shadow: 0 0 3px rgba(255, 255, 255, 0.75);
+}
+
+#scoreboard {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+
+    font-size: 1.5rem;
+    font-weight: bold;
+    /* border: 1px solid white; */
+}
+
+#scoreboard span {
+    display: inline-block;
+    width: 5rem;
+
+    font-weight: normal;
+    color:  rgba(0, 120, 175, 0.5);
+    text-shadow: 0 0 2px rgba(112, 210, 255, 0.5);
 }
