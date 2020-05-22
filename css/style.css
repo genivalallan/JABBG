@@ -1,0 +1,48 @@
+html, body {
+    margin: 0;
+}
+
+body {
+    overflow: hidden;
+    background-color: black;
+    min-width: 800px;
+    min-height: 600px;
+    width: auto;
+    height: auto;
+}
+
+/* HEADER SECTION */
+
+header {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0;
+    font-family: 'VT323', monospace;
+    letter-spacing: 1px;
+}
+
+#level-title {
+    position: absolute;
+    margin: 5px;
+    width: 25%;
+    
+    font-size: 1.5rem;
+    color: gold;
+    text-shadow: 0 0 5px yellow;
+}
+
+#game-title {
+    position: absolute;
+    margin: 5px;
+    width: 75%;
+    right: 0;
+
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: right;
+    color: rgba(80%, 80%, 80%, 0.75);
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.75);
+}
