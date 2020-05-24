@@ -43,4 +43,48 @@ class Player extends Ball {
         this.context.arc(this.center.x, this.center.y, this.radius, 0, 2 * Math.PI);
         this.context.stroke();
     }
+
+    /**
+     * Moves the player on the screen.
+     * @param {string} key - The key pressed. A string in the format returned by KeyboardEvent.code.
+     * @param {Point} screenSize - The screen bottom-right boundaries.
+     */
+    move(key, screenSize) {
+        switch (key) {
+            case 'KeyA':
+            case 'ArrowLeft':
+                this.center.x -= this.velocity.x;
+                if (this.center.x - this.radius < 0) {
+                    this.draw();
+                    this.center.x += this.velocity.x;
+                }
+                break;
+            case 'KeyD':
+            case 'ArrowRight':
+                this.center.x += this.velocity.x;
+                if (this.center.x + this.radius > screenSize.x) {
+                    this.draw();
+                    this.center.x -= this.velocity.x;
+                }
+                break;
+            case 'KeyW':
+            case 'ArrowUp':
+                this.center.y -= this.velocity.y;
+                if (this.center.y - this.radius < 0) {
+                    this.draw();
+                    this.center.y += this.velocity.y;
+                }
+                break;
+            case 'KeyS':
+            case 'ArrowDown':
+                this.center.y += this.velocity.y;
+                if (this.center.y + this.radius > screenSize.y) {
+                    this.draw();
+                    this.center.y -= this.velocity.y;
+                }
+                break;
+            default:
+                break;
+        }
+    }
 }
