@@ -62,7 +62,7 @@ const GameLevel = {
     EASY: 'easy',
     NORMAL: 'normal',
     HARD: 'hard',
-    CUSTOM: 'random'
+    RANDOM: 'random'
 };
 
 /**
