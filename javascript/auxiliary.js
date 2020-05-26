@@ -82,10 +82,10 @@ function random(min, max) {
  * 
  * The values returned by the function are indexes of the freqDist array.
  * @param {Array} freqDist - An array of numbers with the frequency distribution.
- * @param {number} retLength - An optional parameter as the length of an array to be returned.
- * @return {number|Array} A single index or an array with freqDist's indexes.
+ * @param {number} retLength - The length of an array to be returned.
+ * @return {Array} A single index or an array with freqDist's indexes.
  */
-function distRandom(freqDist, retLength = 1) {
+function distRandom(freqDist, retLength) {
     /* The intention is to randomly pick an option based on a frequency distribuiton, not just
      * calculate the amount proportional to the percentages.
      * 1) Create an array with the length of the sum of freqDist's values (for an accurate result,
@@ -107,7 +107,7 @@ function distRandom(freqDist, retLength = 1) {
      * This array is used as the freqDist argument to the function.
      * The array returned by distRandom contains values from 0 to 4 representing the options available.
      * 
-     * PS: The function is not strictly tied to the percentages, meaning that it may generate results very differently of the distribution.
+     * PS: The function is not strictly tied to the percentages, meaning that it may generate results with a different distribution.
      *     It may be a good point as it consider the weight of the options but still remains random.
      */
 
@@ -127,16 +127,13 @@ function distRandom(freqDist, retLength = 1) {
         shuffle(distribution);
     }
 
-    // Step 4
-    if(retLength > 1) {
-        let array = [];
-        for (let i = 0; i < retLength; i++) {
-            array.push(random(0, freqDist.length - 1));
-        }
-        return array;
-    } else {
-        return distribution[random(0, freqDist.length - 1)];
+    // Step 4    
+    let array = [];
+    for (let i = 0; i < retLength; i++) {
+        array.push(random(0, freqDist.length - 1));
     }
+
+    return array;
 }
 
 /**
