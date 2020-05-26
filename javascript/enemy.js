@@ -127,4 +127,21 @@ class Enemy extends Ball {
         this.center.x += this.velocity.x;
         this.center.y += this.velocity.y;
     }
+
+    /**
+     * Updates the enemy's strength after a hit and returns a boolean indicating if the object is to be destroyed.
+     * @return {boolean} True if the strength property reached zero. False, otherwise.
+     */
+    hit() {
+        this.strength--;
+
+        if(this.strength < 1) {
+            return true;
+        }
+
+        this.velocity.x = -(this.velocity.x);
+        this.velocity.y = -(this.velocity.y);
+        this.color = Enemy.pickColor(this.strength);
+        return false;
+    }
 }
