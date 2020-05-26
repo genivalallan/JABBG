@@ -19,10 +19,10 @@ class Enemy extends Ball {
      * @param {string} level - The game level (a value defined by the GameLevel object).
      * @param {Point} screenSize - The bottom-right coordinates of the screen.
      * @param {CanvasRenderingContext2D} context - 2D drawing context.
-     * @param {number} arrayLength - An optional parameter for the length of the array to be returned.
-     * @return {Enemy|Array} As many Enemy objects as arrayLength.
+     * @param {number} arrayLength - The length of the array to be returned.
+     * @return {Array} An array of Enemy objects.
      */
-    static create(level, screenSize, context, arrayLength = 1) {
+    static create(level, screenSize, context, arrayLength) {
         /* 
          * Enemy's properties:
          * - The size of the circle is based on the game level.
@@ -37,6 +37,10 @@ class Enemy extends Ball {
          * - The color is based on the strength:
          *   blueish for weak, yellowish for medium and redish for strong.
          */
+
+        if(arrayLength < 1) {
+            return;
+        }
 
         let probDist;
         if (level === GameLevel.EASY) {
@@ -81,10 +85,6 @@ class Enemy extends Ball {
                 color,
                 context
             );
-        }
-
-        if(arrayLength === 1) {
-            return enemies[0];
         }
 
         return enemies;
