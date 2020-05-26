@@ -13,6 +13,17 @@ class Game {
         this.timerID = 0;
         this.enemies = [];
         this.player = Player.create(context, screenSize);
+
+        this.requestAnimationFrame = requestAnimationFrame.bind(window) ||
+                                     webkitRequestAnimationFrame.bind(window) ||
+                                     mozRequestAnimationFrame.bind(window) ||
+                                     msRequestAnimationFrame.bind(window);
+        this.cancelAnimationFrame = cancelAnimationFrame.bind(window) ||
+                                    webkitCancelAnimationFrame.bind(window) ||
+                                    mozCancelAnimationFrame.bind(window) ||
+                                    msCancelAnimationFrame.bind(window);
+        this.animationID = 0;
+        
     }
 
     /**
@@ -21,6 +32,9 @@ class Game {
      * @param {number} enemiesCount - The amount of enemies to be created.
      */
     reset(level, enemiesCount) {
+        screenSize.x = window.innerWidth;
+        screenSize.y = window.innerHeight;
+        
         this.context.fillStyle = 'rgb(0, 0, 0)';
         this.context.fillRect(0, 0, this.screenSize.x, this.screenSize.y);
 
@@ -39,9 +53,15 @@ class Game {
      * Starts the game.
      */
     start() {
+        if(this.gameStatus === GameStatus.PLAY) {
+            return;
+        }
         this.gameStatus = GameStatus.PLAY;
+        this.timerID = setInterval(() => {
+            this.elapsedTime++;
+        }, 1000);
 
-        this.play();
+        this.animationID = this.requestAnimationFrame(this.play.bind(this));
     }
 
     /**
@@ -49,6 +69,13 @@ class Game {
      */
     play() {
         if(this.gameStatus !== GameStatus.PLAY) {
+            return;
+        } else if(this.enemies.length === 0) {
+            this.context.fillStyle = 'rgb(0, 0, 0)';
+            this.context.fillRect(0, 0, this.screenSize.x, this.screenSize.y);
+            this.player.draw();
+
+            this.stop();
             return;
         }
         
@@ -59,8 +86,38 @@ class Game {
         for (let i = 0; i < this.enemies.length; i++) {
             this.enemies[i].move(this.screenSize);
             this.enemies[i].draw();
+
+            if(this.player.center.distance(this.enemies[i].center) < (this.player.radius + this.enemies[i].radius)) {
+                if(this.enemies[i].hit()) {
+                    this.enemies.splice(i, 1);
+                    i--;
+                }
+            }
         }
 
-        requestAnimationFrame(this.play.bind(this));
+
+        // Remover após teste
+        document.getElementById('time').textContent = this.elapsedTime;
+        document.getElementById('balls').textContent = this.enemies.length;
+
+        this.animationID = this.requestAnimationFrame(this.play.bind(this));
+    }
+
+    stop() {
+        if(game.gameStatus === GameStatus.STOP) {
+            return;
+        }
+        this.gameStatus = GameStatus.STOP;
+        clearInterval(this.timerID);
+        this.cancelAnimationFrame(this.animationID);
+        this.enemies = [];
+    }
+
+    pause() {
+        if(game.gameStatus !== GameStatus.PLAY) {
+            return;
+        }
+        this.gameStatus = GameStatus.PAUSE;
+        clearInterval(this.timerID);
     }
 }
