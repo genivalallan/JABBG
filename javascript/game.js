@@ -1,14 +1,14 @@
 class Game {
     /**
      * Creates e manipulates the game environment.
-     * @param {CanvasRenderingContext2D} context - 2D drawing context.
-     * @param {Point} screenSize - The bottom-right coordinates of the screen.
+     * @param {HTMLElement} canvas - The canvas HTML element where the game elements will be drawn.
      */
-    constructor(context, screenSize) {
-        this.context = context;
-        this.screenSize = screenSize;
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.context = this.canvas.getContext('2d');
         this.gameLevel = GameLevel.EASY;
         this.gameStatus = GameStatus.STOP;
+        this.screenSize = new Point(0,0);
         this.elapsedTime = 0;
         this.timerID = 0;
         this.enemies = [];
@@ -32,19 +32,19 @@ class Game {
      * @param {number} enemiesCount - The amount of enemies to be created.
      */
     reset(level, enemiesCount) {
-        screenSize.x = window.innerWidth;
-        screenSize.y = window.innerHeight;
-        
-        this.context.fillStyle = 'rgb(0, 0, 0)';
-        this.context.fillRect(0, 0, this.screenSize.x, this.screenSize.y);
+        this.canvas.width = this.screenSize.x = window.innerWidth;
+        this.canvas.height = this.screenSize.y = window.innerHeight;
 
         this.elapsedTime = 0;
+        
+        this.context.fillStyle = 'rgb(0, 0, 0)';
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
         let center = new Point(
-            random(this.player.radius, this.screenSize.x - this.player.radius),
-            random(this.player.radius, this.screenSize.y - this.player.radius)
+            random(this.player.radius, this.canvas.width - this.player.radius),
+            random(this.player.radius, this.canvas.height - this.player.radius)
         );
         this.player.center = center;
-        this.elapsedTime = 0;
 
         this.enemies = Enemy.create(level, this.screenSize, this.context, enemiesCount);
     }
@@ -57,7 +57,7 @@ class Game {
             return;
         }
         this.gameStatus = GameStatus.PLAY;
-        this.timerID = setInterval(() => {
+        this.timerID = window.setInterval(() => {
             this.elapsedTime++;
         }, 1000);
 
@@ -72,7 +72,7 @@ class Game {
             return;
         } else if(this.enemies.length === 0) {
             this.context.fillStyle = 'rgb(0, 0, 0)';
-            this.context.fillRect(0, 0, this.screenSize.x, this.screenSize.y);
+            this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
             this.player.draw();
 
             this.stop();
@@ -80,7 +80,7 @@ class Game {
         }
         
         this.context.fillStyle = 'rgba(0, 0, 0, 0.25)';
-        this.context.fillRect(0, 0, this.screenSize.x, this.screenSize.y);
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.player.draw();
         for (let i = 0; i < this.enemies.length; i++) {
@@ -91,14 +91,10 @@ class Game {
                 if(this.enemies[i].hit()) {
                     this.enemies.splice(i, 1);
                     i--;
+                    continue;
                 }
             }
         }
-
-
-        // Remover após teste
-        document.getElementById('time').textContent = this.elapsedTime;
-        document.getElementById('balls').textContent = this.enemies.length;
 
         this.animationID = this.requestAnimationFrame(this.play.bind(this));
     }
@@ -108,7 +104,7 @@ class Game {
             return;
         }
         this.gameStatus = GameStatus.STOP;
-        clearInterval(this.timerID);
+        window.clearInterval(this.timerID);
         this.cancelAnimationFrame(this.animationID);
         this.enemies = [];
     }
@@ -118,6 +114,6 @@ class Game {
             return;
         }
         this.gameStatus = GameStatus.PAUSE;
-        clearInterval(this.timerID);
+        window.clearInterval(this.timerID);
     }
 }
