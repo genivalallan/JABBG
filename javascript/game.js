@@ -8,11 +8,11 @@ class Game {
         this.context = this.canvas.getContext('2d');
         this.gameLevel = GameLevel.EASY;
         this.gameStatus = GameStatus.STOP;
-        this.screenSize = new Point(0,0);
+        this.screenSize = new Point(this.canvas.width, this.canvas.height);
         this.elapsedTime = 0;
         this.timerID = 0;
         this.enemies = [];
-        this.player = Player.create(context, screenSize);
+        this.player = Player.create(this.context, screenSize);
 
         this.requestAnimationFrame = requestAnimationFrame.bind(window) ||
                                      webkitRequestAnimationFrame.bind(window) ||
@@ -115,5 +115,49 @@ class Game {
         }
         this.gameStatus = GameStatus.PAUSE;
         window.clearInterval(this.timerID);
+    }
+
+    /**
+     * Responds to the keys pressed.
+     * @param {KeyboardEvent} key - A KeyboardEvent object with information about the key pressed.
+     */
+    keyboardHandler(event) {
+        switch (event.code) {
+            case 'Escape':  // Stop/Quit
+            case 'KeyQ':
+                this.stop();
+                break;
+            case 'KeyP':    // Pause
+                this.pause();
+                break;
+            case 'Enter':   // Start
+            case 'Space':
+                if(this.gameStatus === GameStatus.STOP) {
+                    this.reset('easy', 10);
+                    this.start();
+                } else if(this.gameStatus === GameStatus.PAUSE) {
+                    this.start();
+                }
+                break;
+            case 'KeyR':    // Restart
+                this.stop();
+                this.reset('hard', 10);
+                this.start();
+                break;
+            case 'ArrowUp':     // Moviment
+            case 'ArrowDown':
+            case 'ArrowLeft':
+            case 'ArrowRight':
+            case 'KeyW':
+            case 'KeyS':
+            case 'KeyA':
+            case 'KeyD':
+                if(this.gameStatus === GameStatus.PLAY) {
+                    this.player.move(event.code, this.screenSize);
+                }
+                break;
+            default:    // Return the KeyboardEvent
+                return event;
+        }
     }
 }
