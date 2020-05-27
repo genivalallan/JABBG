@@ -12,7 +12,7 @@ class Game {
         this.elapsedTime = 0;
         this.timerID = 0;
         this.enemies = [];
-        this.player = Player.create(this.context, screenSize);
+        this.player = Player.create(this.context, this.screenSize);
 
         this.requestAnimationFrame = requestAnimationFrame.bind(window) ||
                                      webkitRequestAnimationFrame.bind(window) ||
@@ -32,8 +32,8 @@ class Game {
      * @param {number} enemiesCount - The amount of enemies to be created.
      */
     reset(level, enemiesCount) {
-        this.canvas.width = this.screenSize.x = window.innerWidth;
-        this.canvas.height = this.screenSize.y = window.innerHeight;
+        this.canvas.width = this.screenSize.x = this.canvas.parentElement.offsetWidth;
+        this.canvas.height = this.screenSize.y = this.canvas.parentElement.offsetHeight;
 
         this.elapsedTime = 0;
         
