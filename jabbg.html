@@ -7,16 +7,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display&family=Iceberg&family=Iceland&family=Kelly+Slab&family=Oxanium&family=Righteous&family=Share&family=Squada+One&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <script src="./javascript/auxiliary.js" defer></script>
+    <script src="./javascript/player.js" defer></script>
+    <script src="./javascript/enemy.js" defer></script>
+    <script src="./javascript/game.js"></script>
+    <script src="./javascript/main.js" defer></script>
 </head>
 <body>
     <header>
         <p id="level-title">normal</p>
         <p id="game-title">just another bouncing balls game</p>
         <p id="scoreboard">
-            Balls: <span>01234</span> Time: <span>56789</span>
+            Balls: <span id="balls"></span> Time: <span id="time"></span>
         </p>
     </header>
-    <div id="settings" class="dialog"></div>
+    <div id="settings" class="dialog">
+        <a class="close-btn">X</a>
+        <h3>Settings</h3>
+        <p>
+            Choose the difficulty and how many balls you want to play against.<br>
+            Press <code>&lt;H&gt;</code> for help, <code>&lt;Enter&gt;</code> to start.
+        </p>
+        <section>
+            <label for="level-selector">Difficulty:</label>
+            <select name="level-selector" id="level-selector">
+                <option value="easy" selected>Easy</option>
+                <option value="normal">Normal</option>
+                <option value="hard">Hard</option>
+                <option value="random">Random</option>
+            </select>
+            <label for="balls-counter">Number of balls:</label>
+            <input type="number" name="balls-counter" id="balls-counter">
+        </section>
+        <a id="btn-start">Start</a>
+    </div>
     <div id="help" class="dialog"></div>
     <canvas id="game-screen"></canvas>
 </body>

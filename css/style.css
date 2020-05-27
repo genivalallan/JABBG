@@ -1,3 +1,5 @@
+/* GENERAL STYLES */
+
 html, body {
     margin: 0;
     width: 100%;
@@ -9,6 +11,63 @@ body {
     background-color: black;
     min-width: 800px;
     min-height: 600px;
+}
+
+code {
+    background-color: gray;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+
+    font-family: monospace;
+    font-weight: bold;
+}
+
+/* DIALOG STYLES */
+
+.dialog {
+    display: block;
+    position: absolute;
+    padding: 1rem;
+    min-width: fit-content;
+    min-height: fit-content;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: rgba(118, 160, 212, 0.5);
+    border-radius: 10px;
+    color: floralwhite;
+    font-family: 'Share';
+    text-align: center;
+    border: 1px solid white;
+    line-height: 1.5rem;
+
+    box-shadow: 3px 5px 10px rgba(80%, 80%, 80%, 0.75);
+}
+
+/* CLOSE BUTON STYLES */
+
+.close-btn {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 0.3rem 0.7rem;
+
+    border-radius: 5px;
+    background-color: rgba(211, 211, 211, 0.1);
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-shadow: 0 0 3px black;
+
+    cursor: default;
+}
+
+.close-btn:hover {
+    background-color: rgba(211, 211, 211, 0.3);
+    text-shadow: 0 0 5px white;
 }
 
 /* HEADER SECTION */
@@ -56,7 +115,6 @@ header {
 
     font-size: 1.5rem;
     font-weight: bold;
-    /* border: 1px solid white; */
 }
 
 #scoreboard span {
@@ -66,4 +124,55 @@ header {
     font-weight: normal;
     color:  rgba(0, 120, 175, 0.5);
     text-shadow: 0 0 2px rgba(112, 210, 255, 0.5);
+}
+
+/* SETTINGS DIALOG */
+
+#settings h3 {
+    letter-spacing: 0.1rem;
+    text-shadow: 0 0 3px black;
+}
+
+#settings select + label {
+    margin-left: 3rem;
+}
+
+#settings input,
+#settings select {
+    width: 4.5rem;
+    outline: none;
+}
+
+#btn-start {
+    display: block;
+    padding: 0.8rem 2.5rem;
+    margin-top: 1.5rem;
+    width: 50%;
+    transform: translateX(50%);
+
+    box-sizing: border-box;
+    border: 2px solid rgb(25, 73, 121);
+    border-radius: 5px;
+
+    background-color: rgba(86, 117, 155, 0.8);
+    color: rgb(17, 33, 53);
+    font-size: 1.2rem;
+    letter-spacing: 0.2rem;
+    font-weight: bold;
+    text-shadow: 0 0 7px rgb(9, 9, 39);
+
+    cursor: default;
+    transition: all 0.3s ease;
+}
+
+#btn-start:hover {
+    color: white;
+    text-shadow: 0 0 10px whitesmoke;
+    background-color: rgba(25, 73, 121, 0.8);
+}
+
+/* HELP DIALOG */
+
+#help {
+    display: none;
 }
