@@ -22,7 +22,7 @@ code {
     font-weight: bold;
 }
 
-/* DIALOG STYLES */
+/* DIALOG CLASS */
 
 .dialog {
     display: block;
@@ -45,7 +45,7 @@ code {
     box-shadow: 3px 5px 10px rgba(80%, 80%, 80%, 0.75);
 }
 
-/* CLOSE BUTON STYLES */
+/* CLOSE BUTON CLASS */
 
 .close-btn {
     display: block;
@@ -108,7 +108,7 @@ header {
     text-shadow: 0 0 3px rgba(255, 255, 255, 0.75);
 }
 
-#scoreboard {
+#score {
     position: absolute;
     top: 20px;
     right: 10px;
@@ -117,7 +117,7 @@ header {
     font-weight: bold;
 }
 
-#scoreboard span {
+#score span {
     display: inline-block;
     width: 5rem;
 
@@ -174,5 +174,11 @@ header {
 /* HELP DIALOG */
 
 #help {
+    display: none;
+}
+
+/* SCOREBOARD DIALOG */
+
+#scoreboard {
     display: none;
 }
