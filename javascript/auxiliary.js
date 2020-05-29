@@ -83,28 +83,30 @@ function random(min, max) {
  * The values returned by the function are indexes of the freqDist array.
  * @param {Array} freqDist - An array of numbers with the frequency distribution.
  * @param {number} retLength - The length of an array to be returned.
- * @return {Array} A single index or an array with freqDist's indexes.
+ * @return {Array} An array with freqDist's indexes.
  */
 function distRandom(freqDist, retLength) {
     /* The intention is to randomly pick an option based on a frequency distribuiton, not just
      * calculate the amount proportional to the percentages.
+     * The algorithm step by step:
      * 1) Create an array with the length of the sum of freqDist's values (for an accurate result,
      *    the sum must be 100 or a notable fraction like 10, 20, 25 or 50).
      * 2) Fill the array with as many elements as corresponding to the percentage.
      *    Each value in this array is an index of freqDist.
      * 3) Shuffle the array, so the elements become randomly distributed.
-     * 4) Pick a random number between 0 and the length of the array.
-     * 5) return the element pointed by the index generated on step 4.
+     * 4) Randomly pick one of the elements in the array and push into the distributed array that
+     *    will be returned.
+     * 5) Return the array filled with indexes from step 4.
      * 
      * Example:
      * Imagine you have 5 options to choose and they have the following percentages:
      * Option 1 - 15%, Option 2 - 25%, Option 3 - 10%, Option 4 - 30%, Option 5 - 20%
      * 
-     * For this case, we need a 5 elements array (each of which represents an option available).
+     * For this case, we need a 5 elements array (each of which element represents an option available).
      * We fill this array with values acording to the percentage distribution. A sum of 20 gives
-     * us 5% correspondence, fitting nicely to the percentages.
+     * us 5% correspondence per unit, fitting nicely to the percentages.
      * We can, then, create the following array: [3, 5, 2, 6, 4], which corresponds exactly with the distribution.
-     * This array is used as the freqDist argument to the function.
+     * This array is passed as the freqDist argument to the function.
      * The array returned by distRandom contains values from 0 to 4 representing the options available.
      * 
      * PS: The function is not strictly tied to the percentages, meaning that it may generate results with a different distribution.
