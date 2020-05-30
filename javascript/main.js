@@ -3,6 +3,7 @@ const levelSelector = document.getElementById('level-selector');
 const ballsCounter = document.getElementById('balls-counter');
 const settingsDialog = document.getElementById('settings');
 const startBtn = document.getElementById('btn-start');
+const settingsCloseBtn = document.getElementById('settings-close-btn');
 
 ballsCounter.min = 5;
 ballsCounter.max = 100;
@@ -58,4 +59,8 @@ startBtn.onclick = function () {
     game.reset(levelSelector.value, parseInt(ballsCounter.value));
     settingsDialog.style.display = 'none';
     game.start();
+};
+
+settingsCloseBtn.onclick = function () {
+    settingsDialog.style.display = 'none';
 };
