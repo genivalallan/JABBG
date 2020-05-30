@@ -2,8 +2,9 @@ class Game {
     /**
      * Creates e manipulates the game environment.
      * @param {HTMLElement} canvas - The canvas HTML element where the game elements will be drawn.
+     * @param {function} update - A callback function to receive the balls counting and elapsed time.
      */
-    constructor(canvas) {
+    constructor(canvas, update) {
         this.canvas = canvas;
         this.context = this.canvas.getContext('2d');
         this.gameLevel = GameLevel.EASY;
@@ -13,6 +14,7 @@ class Game {
         this.timerID = 0;
         this.enemies = [];
         this.player = Player.create(this.context, this.screenSize);
+        this.update = update;
 
         this.requestAnimationFrame = requestAnimationFrame.bind(window) ||
                                      webkitRequestAnimationFrame.bind(window) ||
@@ -59,6 +61,7 @@ class Game {
         this.gameStatus = GameStatus.PLAY;
         this.timerID = window.setInterval(() => {
             this.elapsedTime++;
+            this.update?.(this.enemies.length, this.elapsedTime);
         }, 1000);
 
         this.animationID = this.requestAnimationFrame(this.play.bind(this));
@@ -91,6 +94,7 @@ class Game {
                 if(this.enemies[i].hit()) {
                     this.enemies.splice(i, 1);
                     i--;
+                    this.update?.(this.enemies.length, this.elapsedTime);
                     continue;
                 }
             }
