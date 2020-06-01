@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Just Another Bouncing Balls Game</title>
-    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display&family=Iceberg&family=Iceland&family=Kelly+Slab&family=Oxanium&family=Righteous&family=Share&family=Squada+One&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Iceland&family=Share&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <script src="./javascript/auxiliary.js" defer></script>
     <script src="./javascript/player.js" defer></script>
@@ -20,8 +20,10 @@
             Balls: <span id="balls"></span> Time: <span id="time"></span>
         </p>
     </header>
+    
+    <!-- SETTINGS DIALOG -->
     <div id="settings" class="dialog">
-        <a id="settings-close-btn" class="close-btn">X</a>
+        <a id="settings-close-btn" class="close-dialog btn">X</a>
         <h3>Settings</h3>
         <p>
             Choose the difficulty and how many balls you want to play against.<br>
@@ -38,9 +40,103 @@
             <label for="balls-counter">Number of balls:</label>
             <input type="number" name="balls-counter" id="balls-counter">
         </section>
-        <a id="btn-start">Start</a>
+        <a id="start-btn">Start</a>
     </div>
-    <div id="help" class="dialog"></div>
+
+    <!-- HELP DIALOG -->
+    <div id="help" class="dialog">
+        <a id="help-close-btn" class="close-dialog btn">X</a>
+        <h3>Help</h3>
+        <div class="slider">
+            <input id="instructions" type="radio" name="card" checked>
+            <section name="instructions-card" class="card">
+              <h1>Instructions</h1>
+              <p style="text-align: left;">
+                &bullet; Use the keyboard to move the player around the screen.<br>
+                &bullet; Hit the enemies to destroy them as fast as you can.<br>
+                &bullet; Enemies have different sizes and speeds.<br>
+                &bullet; The harder the level, the more probable to get harder enemies.<br>
+                &bullet; For a proper experience, a minimum screen size of 800x600 is recommended.
+              </p>
+              <label for="enemies" class="prev-btn btn">&lt; Enemies</label>
+              <label for="constrols" class="next-btn btn">Controls &gt;</label>
+            </section>
+            <input id="constrols" type="radio" name="card">
+            <section id="controls-card" class="card">
+              <h1>Controls</h1>
+              <table>
+                <tr>
+                  <td>
+                    <p>
+                      <code>W</code><br><code>A</code> <code>S</code> <code>D</code>
+                    </p>
+                    <p>
+                        <code>&uarr;</code><br><code>&larr;</code> <code>&darr;</code> <code>&rarr;</code>
+                    </p>
+                  </td>
+                  <td>
+                      Use WASD or arrow keys to move around.
+                  </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>Space</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>Enter</code>
+                    </td>
+                    <td>
+                        Start the game.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>Escape</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>Q</code>
+                    </td>
+                    <td>
+                        Stop the game.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>P</code>
+                    </td>
+                    <td>
+                        Pause the game.
+                    </td>
+                </tr>
+              </table>
+              <label for="instructions" class="prev-btn btn">&lt; Instructions</label>
+              <label for="enemies" class="next-btn btn">Enemies &gt;</label>
+            </section>
+            <input id="enemies" type="radio" name="card">
+            <section id="enemies-card" class="card">
+                <h1>Enemies</h1>
+                <table>
+                    <tr>
+                        <th rowspan="2"></th><th rowspan="2">Size</th><th rowspan="2">Strength</th><th rowspan="2">Speed</th>
+                        <th colspan="4">Probability</th>
+                    </tr>
+                    <tr>
+                        <th>Easy</th><th>Normal</th><th>Hard</th><th>Random</th>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 2.5rem; color: cornflowerblue;">&#9679;</td><td>Big</td><td>Weak</td><td>Slow</td>
+                        <td>60%</td><td>40%</td><td>25%</td><td>33%</td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 2.0rem; color: gold;">&#9679;</td><td>Medium</td><td>Medium</td><td>Medium</td>
+                        <td>30%</td><td>40%</td><td>25%</td><td>33%</td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 1.5rem; color: darkred;">&#9679;</td><td>Small</td><td>Strong</td><td>Fast</td>
+                        <td>10%</td><td>20%</td><td>50%</td><td>33%</td>
+                    </tr>
+              </table>
+              <label for="constrols" class="prev-btn btn">&lt; Controls</label>
+              <label for="instructions" class="next-btn btn">Instructions &gt;</label>
+            </section>
+        </div>
+    </div>
+
+    <!-- SCOREBOARD DIALOG -->
     <div id="scoreboard" class="dialog"></div>
     <canvas id="game-screen"></canvas>
 </body>
