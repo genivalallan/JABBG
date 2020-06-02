@@ -142,6 +142,17 @@ header {
     text-shadow: 0 0 2px rgba(112, 210, 255, 0.5);
 }
 
+/* PAUSE DIALOG BOX */
+
+#pause {
+    display: none;
+
+    width: 15rem;
+
+    font-family: 'Iceland';
+    text-shadow: 0 0 10px white;
+}
+
 /* SETTINGS DIALOG BOX */
 
 #settings {
